@@ -1,0 +1,18 @@
+[0.1] INITIAL IMPLEMENTATION [DONE]
+    -created basic foundation for the ECS
+    -usable but limited to 32 MAX Components and 32 MAX Entities
+    -not efficient when querying components
+    -functionality is basic and limited
+    -tested and working, HIGHLY EXPERIMENTAL
+
+[0.1.5] Preparation for 0.2 [DONE]
+    -create multiple query of components
+    -maybe add archetypes
+    -handle more than 10,000 entities efficiently
+
+
+[0.2] QUERY IMPROVEMENTS AND CODE CHANGES [IN PROGRESS]
+    -improve single component querying
+    -bug fix
+    -must be structured for memory efficiency
+    -prioritize readability and maintainability over performance

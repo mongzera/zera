@@ -1,8 +1,8 @@
 package com.chemicaldev.zera.components;
 
-import com.chemicaldev.zera.IComponent;
+import com.chemicaldev.zera.AComponent;
 
-public class Position implements IComponent {
+public class Position extends AComponent {
     public float x, y, z;
 
     public String toString(){

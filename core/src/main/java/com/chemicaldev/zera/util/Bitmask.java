@@ -23,6 +23,31 @@ public class Bitmask {
         return (mask & bitset) == bitset;
     }
 
+    public boolean has(Bitmask mask){
+        return has(mask.getBitset());
+    }
+
+    public int getBitset(){
+        return mask;
+    }
+
+    public Bitmask or(Bitmask mask){
+        this.mask |= mask.getBitset();
+        return this;
+    }
+
+    public int popCount(){
+        int count = 0;
+        int tempMask = getBitset();
+
+        while(tempMask > 1){
+            tempMask >>= 1;
+            count++;
+        }
+
+        return count;
+    }
+
     @Override
     public String toString() {
         return Integer.toBinaryString(mask);
