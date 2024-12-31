@@ -103,8 +103,8 @@ There are a lot of techniques for implementation out there, especially for Numer
 [Numerical Integrator](https://www.youtube.com/watch?v=-GWTDhOQU6M)
 
 ### Engine
-Create an Engine object on your main file. If you have separate scenes for your games, you can create an Engine object for each.
-So that each scene can contain its own entities different from other scenes.
+Create an Engine object on your main file. If you have separate scenes for your game, you can create an Engine object for each.
+Each scene can contain its own entities different from other scenes.
 
 ```
 public class Main {
