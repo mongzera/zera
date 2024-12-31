@@ -12,6 +12,8 @@ If you are familiar with arrays, the way ECS works is that there is a ComponentP
 Now, an instance of a Component is stored in that array in a specific index exactly the same with the EntityID if and only if that EntityID is specified to have this particular property.
 
 ## Get Started
+Download the latest jar file located at `out/artifacts/zera`.
+Include it as a library of your project.
 
 ## Why Zera ECS
 
@@ -21,6 +23,8 @@ Now, an instance of a Component is stored in that array in a specific index exac
 - No further overheads
 - Simple and Basic
 - Versatile
+
+
 
 ### Entity
 Entity is just an integer that is used to identify an object. Basically, an ID.\
@@ -97,6 +101,54 @@ There are a lot of techniques for implementation out there, especially for Numer
 
 [DeltaTime](https://www.youtube.com/watch?v=yGhfUcPjXuE)\
 [Numerical Integrator](https://www.youtube.com/watch?v=-GWTDhOQU6M)
+
+### Engine
+Create an Engine object on your main file. If you have separate scenes for your games, you can create an Engine object for each.
+So that each scene can contain its own entities different from other scenes.
+
+```
+public class Main {
+    Engine engine;
+    public Main(){
+        engine = new Engine(10000, 32); // Engine(maxNumOfEntites, maxNumOfComponents);
+
+        engine.createComponent(Position.class);
+        engine.createComponent(Velocity.class);
+        engine.createComponent(Mesh.class);
+
+        Entity e = engine.createEntity();
+        Entity e2 = engine.createEntity();
+
+        Velocity v = new Velocity();
+        v.vx = 10;
+
+        engine.assignComponent(Position.class, e);
+        engine.assignComponent(Position.class, e2);
+        engine.assignComponent(v, e);
+        engine.assignComponent(v, e2);
+        engine.assignComponent(Mesh.class, e2);
+
+        engine.addSystem(new Physics());
+
+        //game loop
+        while(true){
+            //some code...
+
+            if(callFrame) engine.updateSystems();
+        }
+    }
+
+    public static void main(String[] args){
+        Main main = new Main();
+    }
+
+}
+```
+
+Notice that you can assign components in two ways.\
+First, `engine.assignComponent(Position.class, e);` will assign an uninitialized `AComponent<Position>` to Entity e.\
+The second, `engine.assignComponent(v, e);` will assign an initialized `AComponent<Velocity>` to Entity e since we set `v.vx = 10`.
+
 
 
 
