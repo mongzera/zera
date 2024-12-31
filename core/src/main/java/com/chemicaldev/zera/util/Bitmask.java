@@ -40,7 +40,7 @@ public class Bitmask {
         int count = 0;
         int tempMask = getBitset();
 
-        while(tempMask > 1){
+        while(tempMask != 1){
             tempMask >>= 1;
             count++;
         }

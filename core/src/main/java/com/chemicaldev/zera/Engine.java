@@ -54,7 +54,8 @@ public class Engine {
         archetype.entities = new Entity[m_numberOfCurrentEntities];
 
         for(int i = 0; i < m_numberOfCurrentEntities; i++){
-            if(m_entities[i] == null) break; //TODO: Fix in the future, must not be `break` because we will implement entity slot reusability
+            if(m_entities[i] == null) continue; //TODO: Fix in the future, must not be `break` because we will implement entity slot reusability
+                                                //NOTE:: break was changed to continue...
 
             if(m_entities[i].getComponentMask().has(componentMask)) archetype.entities[archetype.length++] = m_entities[i];
 
@@ -64,6 +65,8 @@ public class Engine {
     }
 
     public <T extends AComponent> int getId(Class<T> type){ //improve the way we determine component id.
+        //Get the componentSignature by counting the number of shifts for it to be = 1
+        // 010000 has 4 shifts to right
         Bitmask mask = componentMaskMap.get(type.getSimpleName());
 
         if(mask != null) return mask.popCount();
