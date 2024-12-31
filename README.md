@@ -11,6 +11,8 @@ We use an index or an ID to determine a particular object, then that object can 
 If you are familiar with arrays, the way ECS works is that there is a ComponentPool which is basically an array of the same type of Component.
 Now, an instance of a Component is stored in that array in a specific index exactly the same with the EntityID if and only if that EntityID is specified to have this particular property.
 
+## Get Started
+
 ## Why Zera ECS
 
 - Easy to integrate
@@ -91,8 +93,10 @@ In the `updateSystem()` function, we define an `Archetype` which will be explain
 After we have all the necessary information, we will perform our logic which is in this case a simple numerical integrator. Basically, we change an object's position depending on its velocity.
 If you noticed, it is multiplied by `deltaTime` which is the elapsed time (milliseconds) from the current frame and the last frame. This is fundamental game development and you can learn more about it.
 
-There's a lot of techniques out there, especially for Numerical Integration, this is an example of the Euler Method.
+There are a lot of techniques for implementation out there, especially for Numerical Integration, this is an example of the Euler Method.
 
 [DeltaTime](https://www.youtube.com/watch?v=yGhfUcPjXuE)\
 [Numerical Integrator](https://www.youtube.com/watch?v=-GWTDhOQU6M)
+
+
 
