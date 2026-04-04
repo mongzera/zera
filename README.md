@@ -146,6 +146,14 @@ public void init() {
 
 ```
 
+We can write this within the callback instead
+
+```
+Position p = engine.getComponentOfEntity(Position.class, entity);
+Velocity v = engine.getComponentOfEntity(Velocity.class, entity);
+rest of the logic...
+```
+
 ### Engine
 Create an Engine object on your main file. If you have separate scenes for your game, you can create an Engine object for each.
 Each scene can contain its own entities different from other scenes.
