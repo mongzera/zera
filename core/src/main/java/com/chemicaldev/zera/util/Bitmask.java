@@ -19,6 +19,10 @@ public class Bitmask {
         mask &= ~(1 << bitPlacement);
     }
 
+    public void setAllFalse() {
+        this.mask = 0;
+    }
+
     public boolean has(int bitset){
         return (mask & bitset) == bitset;
     }
@@ -36,16 +40,8 @@ public class Bitmask {
         return this;
     }
 
-    public int popCount(){
-        int count = 0;
-        int tempMask = getBitset();
-
-        while(tempMask != 1){
-            tempMask >>= 1;
-            count++;
-        }
-
-        return count;
+    public int popCount() {
+        return Integer.numberOfTrailingZeros(mask);
     }
 
     @Override

@@ -33,6 +33,11 @@ To create an entity:
 Entity e = engine.createEntity();
 ```
 
+To remove an entity, just write
+```
+engine.removeEntity(e);
+```
+
 ### Component
 AComponent is an attribute or a property that an entity posses.
 It is a characteristic that determines a behaviour or outcome of an Entity.
@@ -70,6 +75,8 @@ public class Physics extends ASystem {
 
     @Override
     public void updateSystem() {
+    
+        /** The old way **/
         Archetype physicsArch = engine.getArchetype(Mesh.class, Position.class, Velocity.class);
         for(int i = 0; i < physicsArch.length; i++){
             int entityId = physicsArch.entities[i].getEntityId();
@@ -87,6 +94,24 @@ public class Physics extends ASystem {
             p.y += v.vy * deltaTime * 0.5f;
             p.z += v.vz * deltaTime * 0.5f;
         }
+        
+        /** The new way high-performance method **/
+        engine.forEach( entity -> {
+            int entityId = physicsArch.entities[i].getEntityId();
+            Position p = positionPool.getComponent(entityId);
+            Velocity v = velocityPool.getComponent(entityId);
+
+            //This is an example of a basic Numerical Integrator
+            p.x += v.vx * deltaTime * 0.5f;
+            p.y += v.vy * deltaTime * 0.5f;
+            p.z += v.vz * deltaTime * 0.5f;
+
+            //Handle Collisions
+
+            p.x += v.vx * deltaTime * 0.5f;
+            p.y += v.vy * deltaTime * 0.5f;
+            p.z += v.vz * deltaTime * 0.5f;
+        }, Position.class, Velocity.class);
     }
 }
 ```
@@ -101,6 +126,25 @@ There are a lot of techniques for implementation out there, especially for Numer
 
 [DeltaTime](https://www.youtube.com/watch?v=yGhfUcPjXuE)\
 [Numerical Integrator](https://www.youtube.com/watch?v=-GWTDhOQU6M)
+
+The <b>New Method</b> presents a callback function with the current Entity being iterated as an argument.
+This creates a much better performance due to zero-allocation unlike before where we have to create an `Archetype` object
+every update. 
+
+Now, you don't even need to create these fields anymore for all systems
+
+```
+ComponentPool<Position> positionPool;
+ComponentPool<Velocity> velocityPool;
+
+@Override
+public void init() {
+    positionPool = engine.getPool(Position.class);
+    velocityPool = engine.getPool(Velocity.class);
+
+}
+
+```
 
 ### Engine
 Create an Engine object on your main file. If you have separate scenes for your game, you can create an Engine object for each.
