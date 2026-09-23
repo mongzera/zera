@@ -29,12 +29,12 @@ Include it as a library of your project.
 ### Entity
 Entity is just an integer that is used to identify an object. Basically, an ID.\
 To create an entity:
-```
+```java
 Entity e = engine.createEntity();
 ```
 
 To remove an entity, just write
-```
+```java
 engine.removeEntity(e);
 ```
 
@@ -43,7 +43,7 @@ AComponent is an attribute or a property that an entity posses.
 It is a characteristic that determines a behaviour or outcome of an Entity.
 At its core, it is a modular piece of information about some entity.\
 We define some AComponent named Position:
-```
+```java
 public class Position extends AComponent {
     public float x, y, z;
 }
@@ -51,7 +51,7 @@ public class Position extends AComponent {
 
 Then, we define another AComponent named Velocity
 
-```
+```java
 public class Velocity extends AComponent {
     public float vx, vy, vz;
 }
@@ -62,7 +62,7 @@ ASystem is a system that handles specific components.
 This is where we make our logic responsible for the behavior of the entities.\
 If a particular entity posses such properties, then we will create our logic responsible for how it will interact and behave in the world.
 
-```
+```java
 public class Physics extends ASystem {
     ComponentPool<Position> positionPool;
     ComponentPool<Velocity> velocityPool;
@@ -133,7 +133,7 @@ every update.
 
 Now, you don't even need to create these fields anymore for all systems
 
-```
+```java
 ComponentPool<Position> positionPool;
 ComponentPool<Velocity> velocityPool;
 
@@ -148,7 +148,7 @@ public void init() {
 
 We can write this within the callback instead
 
-```
+```java
 Position p = engine.getComponentOfEntity(Position.class, entity);
 Velocity v = engine.getComponentOfEntity(Velocity.class, entity);
 rest of the logic...
@@ -158,7 +158,7 @@ rest of the logic...
 Create an Engine object on your main file. If you have separate scenes for your game, you can create an Engine object for each.
 Each scene can contain its own entities different from other scenes.
 
-```
+```java
 public class Main {
     Engine engine;
     public Main(){
